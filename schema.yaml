@@ -1,0 +1,24 @@
+COLUMNS:
+  budget: int64
+  genres: object
+  homepage: object
+  id: int64
+  keywords: object
+  original_language: object
+  original_title: object
+  overview: object
+  popularity: float64
+  production_companies: object
+  production_countries: object
+  release_date: object
+  revenue: int64
+  runtime: float64
+  spoken_languages: object
+  status: object
+  tagline: object
+  title: object
+  vote_average: float64
+  vote_count: int64
+  movie_id: int64
+  cast: object
+  crew: object
