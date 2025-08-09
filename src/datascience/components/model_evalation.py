@@ -6,7 +6,7 @@ import numpy as np
 import mlflow
 import joblib
 import random
-import os
+import os,dagshub
 from src.datascience.entity.config_entity import ModelEvaluationConfig
 class ModelEvaluation:
     def __init__(self, config: ModelEvaluationConfig):
@@ -14,13 +14,16 @@ class ModelEvaluation:
 
     def Evaluate(self):
         logger.info("evaluating the model")
-
+       
+         dagshub.init(repo_owner='vasim-rgb',
+             repo_name='mlops-movie-recommender-end-to-end',
+             mlflow=True)
         # Load similarity matrix
         sim = joblib.load( self.config.model_path)
         movies_df = pd.read_csv(self.config.data_path)
 
         assert sim.shape[0] == len(movies_df), "Matrix rows and movie count mismatch!"
-        mlflow.set_tracking_uri("http://localhost:5000") 
+        mlflow.set_tracking_uri("https://dagshub.com/Vasim-rgb/mlops-movie-recommender-end-to-end.mlflow") 
         # Set your MLflow tracking URI
         mlflow.set_experiment("movie_recommendation_experiment")  # Set your experiment name
         # Ensure the artifacts directory exists
