@@ -1,29 +1,25 @@
 from flask import Flask, render_template, request
-import joblib
-from sklearn.metrics.pairwise import cosine_similarity
+from src.datascience.pipeline.prediction_pipelne import PredictionPipeline
 
-app = Flask(_name_)
+app = Flask(__name__)
 
-# Load model once
-model_data = joblib.load("artifacts/model_trainer/model.joblib")
-vectorizer = model_data["vectorizer"]
-vectors = model_data["vectors"]
-titles = model_data["titles"]
+# Initialize prediction pipeline once
+prediction_pipeline = PredictionPipeline()
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/github-webhook", methods=["GET", "POST"])
 def index():
     recommendations = []
-    movie_input = ""
     if request.method == "POST":
-        movie_input = request.form["movie"]
-        if movie_input in titles:
-            idx = titles.index(movie_input)
-            distances = cosine_similarity([vectors[idx]], vectors)
-            recommended_indices = distances[0].argsort()[::-1][1:6]
-            recommendations = [titles[i] for i in recommended_indices]
-        else:
-            recommendations = [f"'{movie_input}' not found."]
-    return render_template("index.html", recommendations=recommendations, movie_input=movie_input)
+        movie_name = request.form.get("movie")
+        if movie_name:
+            try:
+                # Normalize the movie title
+                #convert moviename to lowercase
+                movie_name = movie_name.lower()
+                recommendations = prediction_pipeline.recommend(movie_name)
+            except Exception as e:
+                recommendations = [f"Error: {str('MOVIE NOT FOUND IN DATABASE')}"]
+    return render_template("index.html", recommendations=recommendations)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     app.run(debug=True)
