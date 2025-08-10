@@ -29,5 +29,6 @@ def index():
                 recommendations = ["Error: MOVIE NOT FOUND IN DATABASE"]
     return render_template("index.html", recommendations=recommendations)
 
-if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+# This is the key handler for Vercel serverless environment
+def handler(request, *args, **kwargs):
+    return app(request.environ, start_response=lambda *a, **kw: None)
