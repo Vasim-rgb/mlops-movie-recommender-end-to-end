@@ -72,4 +72,3 @@ mlflow.log_artifact(qual_path)
 joblib.dump(sim, "artifacts/sim.joblib")
 mlflow.log_artifact("artifacts/sim.joblib")
 
-mlflow.end_run()
