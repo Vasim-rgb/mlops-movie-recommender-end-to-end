@@ -1,11 +1,7 @@
 # Movie Recommender MLOps Project
 **<h3><b><u>This project is an end-to-end MLOps pipeline for a movie recommender system using Flask, Docker, Jenkins, and GitHub webhooks,Vercel_deployment.</u></b></h3>**
 > **Note:** Vercel serverless functions have a hard limit of 250MB for deployment size. This project may exceed that limit due to model and data artifacts, so direct deployment to Vercel serverless may not be possible without optimizing or reducing the size of dependencies and artifacts.
-
-<h2><b><u>This project is an end-to-end MLOps pipeline for a movie recommender system using Flask, Docker, Jenkins, and GitHub webhooks,Vercel_deployment.</u></b></h2>
-
 ## Demo Screenshots
-
 ### Movie Recommendation Demo
 ![Movie Demo](images/moviedemo.jpg)
 
