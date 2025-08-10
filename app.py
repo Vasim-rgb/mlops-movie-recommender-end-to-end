@@ -1,20 +1,10 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 from src.datascience.pipeline.prediction_pipelne import PredictionPipeline
 
 app = Flask(__name__)
 
 # Initialize prediction pipeline once
 prediction_pipeline = PredictionPipeline()
-
-@app.route("/github-webhook/", methods=["POST"])
-def github_webhook():
-    try:
-        payload = request.get_json(force=True)  # Get JSON from GitHub
-        print("Webhook received:", payload)  # Log for debugging
-        # You can trigger Jenkins or run your own logic here
-        return jsonify({"status": "Webhook received"}), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 400
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -23,12 +13,13 @@ def index():
         movie_name = request.form.get("movie")
         if movie_name:
             try:
+                # Normalize the movie title
+                #convert moviename to lowercase
                 movie_name = movie_name.lower()
                 recommendations = prediction_pipeline.recommend(movie_name)
-            except Exception:
-                recommendations = ["Error: MOVIE NOT FOUND IN DATABASE"]
+            except Exception as e:
+                recommendations = [f"Error: {str('MOVIE NOT FOUND IN DATABASE')}"]
     return render_template("index.html", recommendations=recommendations)
 
-# This is the key handler for Vercel serverless environment
-def handler(request, *args, **kwargs):
-    return app(request.environ, start_response=lambda *a, **kw: None)
+if __name__ == "__main__":
+    app.run(debug=True, host="localhost", port=5000)
