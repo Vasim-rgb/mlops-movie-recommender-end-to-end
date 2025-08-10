@@ -70,5 +70,4 @@ mlflow.log_artifact(qual_path)
 # Save similarity matrix as artifact
 # ---------------------
 joblib.dump(sim, "artifacts/sim.joblib")
-mlflow.log_artifact("artifacts/sim.joblib")
 
