@@ -6,7 +6,7 @@ app = Flask(__name__)
 # Initialize prediction pipeline once
 prediction_pipeline = PredictionPipeline()
 
-@app.route("/github-webhook", methods=["GET", "POST"])
+@app.route("/webhook", methods=["GET", "POST"])
 def index():
     recommendations = []
     if request.method == "POST":
