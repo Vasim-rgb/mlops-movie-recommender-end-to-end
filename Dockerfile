@@ -2,7 +2,7 @@ FROM python:3.9-slim
 
 WORKDIR /app
 ADD . /app
-COPY artifacts/model_trainer/model.joblib /app
+COPY artifacts/model_trainer/model.joblib.dvc /app
 # Install the dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
