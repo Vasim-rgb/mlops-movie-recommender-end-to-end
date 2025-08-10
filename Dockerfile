@@ -8,7 +8,7 @@ COPY artifacts/model_trainer/model.joblib.dvc /app
 
 # Copy the application code (including model.pkl and templates) into the container
 COPY . .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 # Expose the port that Flask will run on
 EXPOSE 5050
 
