@@ -1,5 +1,5 @@
 # Movie Recommender MLOps Project
-    This project is an end-to-end MLOps pipeline for a movie recommender system using Flask, Docker, Jenkins, and GitHub webhooks.
+<h2><b><u>This project is an end-to-end MLOps pipeline for a movie recommender system using Flask, Docker, Jenkins, and GitHub webhooks.</u></b></h2>
 ## Demo Screenshots
 
 ### Movie Recommendation Demo
