@@ -44,10 +44,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Application deployed successfully on http://localhost:5000"
+            echo "Application deployed successfully on http://localhost:5000"
         }
         failure {
-            echo "❌ Build failed! Check logs."
+            echo " Build failed! Check logs."
         }
     }
 }
