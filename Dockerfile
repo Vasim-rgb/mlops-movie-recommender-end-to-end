@@ -4,11 +4,11 @@ WORKDIR /app
 ADD . /app
 COPY artifacts/model_trainer/model.joblib.dvc /app
 # Install the dependencies from requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+
 
 # Copy the application code (including model.pkl and templates) into the container
 COPY . .
-
+RUN pip install --no-cache-dir -r requirements.txt
 # Expose the port that Flask will run on
 EXPOSE 5050
 
