@@ -11,17 +11,19 @@ from src.datascience.entity.config_entity import ModelEvaluationConfig
 class ModelEvaluation:
     def __init__(self, config: ModelEvaluationConfig):
         self.config = config
-
+        os.environ['MLFLOW_TRACKING_URI']="https://dagshub.com/Vasim-rgb/end_end_ml.mlflow"
+        os.environ['MLFLOW_TRACKING_USERNAME']="Vasim-rgb"
+        os.environ["MLFLOW_TRACKING_PASSWORD"]="900abb7ecb44670bdc1d47d32ab703650e254e3f"
     def Evaluate(self):
         logger.info("evaluating the model")
        
-         dagshub.init(repo_owner='vasim-rgb',
+        dagshub.init(repo_owner='vasim-rgb',
              repo_name='mlops-movie-recommender-end-to-end',
              mlflow=True)
         # Load similarity matrix
         sim = joblib.load( self.config.model_path)
         movies_df = pd.read_csv(self.config.data_path)
-
+     
         assert sim.shape[0] == len(movies_df), "Matrix rows and movie count mismatch!"
         mlflow.set_tracking_uri("https://dagshub.com/Vasim-rgb/mlops-movie-recommender-end-to-end.mlflow") 
         # Set your MLflow tracking URI

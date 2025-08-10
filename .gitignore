@@ -1,7 +1,8 @@
-
+# Ignore artifacts in Git, but allow DVC metadata
+artifacts/
 venv/
 logs/
-artifacts/
+
 __pycache__/
 
 # Byte-compiled / optimized / DLL files
