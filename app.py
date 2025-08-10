@@ -16,10 +16,12 @@ def index():
                 # Normalize the movie title
                 #convert moviename to lowercase
                 movie_name = movie_name.lower()
+                #replacespaces with hyphens
+                movie_name = movie_name.replace(" ", "-")
                 recommendations = prediction_pipeline.recommend(movie_name)
             except Exception as e:
                 recommendations = [f"Error: {str('MOVIE NOT FOUND IN DATABASE')}"]
     return render_template("index.html", recommendations=recommendations)
 
 if __name__ == "__main__":
-    app.run(debug=True, host="localhost", port=5000)
+    app.run(host="0.0.0.0", port=5000)
