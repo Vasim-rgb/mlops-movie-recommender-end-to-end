@@ -1,17 +1,32 @@
 FROM python:3.9-slim
 
+FROM python:3.9-slim
+
+# Install system dependencies for scientific packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	build-essential \
+	gcc \
+	libffi-dev \
+	libssl-dev \
+	libxml2-dev \
+	libxslt1-dev \
+	libjpeg-dev \
+	zlib1g-dev \
+	libpng-dev \
+	git \
+	&& rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
-ADD . /app
-COPY artifacts/model_trainer/model.joblib.dvc /app
-# Install the dependencies from requirements.txt
 
+# Copy only requirements first for better caching
+COPY requirements.txt ./
+RUN pip install --upgrade pip && pip install -r requirements.txt && rm -rf /root/.cache/pip
 
-# Copy the application code (including model.pkl and templates) into the container
+# Copy the rest of the application code
 COPY . .
-RUN pip install -r requirements.txt
-# Expose the port that Flask will run on
-EXPOSE 5050
+
+# Expose the port that Flask will run on (match Jenkins: 5000)
+EXPOSE 5000
 
 # Set the command to run the Flask app
-CMD ["python", "app.py", "--host=0.0.0.0", "--port=5050"]
-# CMD ["python", "app/app.py"]
+CMD ["python", "app.py", "--host=0.0.0.0", "--port=5000"]
