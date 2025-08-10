@@ -1,21 +1,6 @@
-# --- Core ML / Data ---
 numpy==2.2.5
 pandas==2.2.3
 scikit-learn==1.6.1
-
-# --- Web API ---
 Flask==3.1.1
 flask-cors==6.0.0
-gunicorn==21.1.0  # for production serving
-
-# --- MLOps ---
-mlflow-skinny==2.22.0  # smaller than full mlflow
-SQLAlchemy==2.0.41  # needed by mlflow
-
-# --- Utilities ---
-requests==2.32.3
-python-dateutil==2.9.0.post0
-pytz==2025.2
-
-# --- Optional if you want async alternative ---
-uvicorn==0.34.2
+gunicorn==21.1.0
